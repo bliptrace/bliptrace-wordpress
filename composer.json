@@ -1,0 +1,53 @@
+{
+    "name": "g8scope/wordpress",
+    "version": "1.0.0",
+    "description": "WordPress plugin SDK for g8scope — captures PHP errors and exceptions and ships them to the ingest API. Thin adapter over g8scope/php.",
+    "keywords": [
+        "wordpress",
+        "g8scope",
+        "error-tracking",
+        "observability",
+        "sdk",
+        "php"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "g8scope/php": "*"
+    },
+    "require-dev": {
+        "pestphp/pest": "^3.0",
+        "laravel/pint": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "G8Scope\\WordPress\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "G8Scope\\WordPress\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "lint": "vendor/bin/pint"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../g8scope-php",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
