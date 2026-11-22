@@ -5,7 +5,7 @@ use G8Scope\WordPress\Plugin;
 
 /**
  * Plugin Name: g8scope
- * Description: Captures PHP errors and exceptions on your WordPress site and ships them to the g8scope ingest API. Thin adapter over the g8scope/php runtime SDK. Never breaks your site.
+ * Description: Captures PHP errors and exceptions on your WordPress site and ships them to the g8scope ingest API. Thin adapter over the bliptrace/php runtime SDK. Never breaks your site.
  * Version: 1.0.0
  * Author: Developers Hub Sdn Bhd
  * License: MIT

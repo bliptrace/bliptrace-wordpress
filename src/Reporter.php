@@ -11,7 +11,7 @@ use G8Scope\Php\Transport\Transport;
 use Throwable;
 
 /**
- * WordPress reporter: a thin wrapper over the runtime g8scope/php client.
+ * WordPress reporter: a thin wrapper over the runtime bliptrace/php client.
  *
  * Captures thrown exceptions and PHP fatal errors (via error_get_last during
  * shutdown), enriches them with request context, and ships them. Every public

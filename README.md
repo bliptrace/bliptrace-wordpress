@@ -2,7 +2,7 @@
 
 A WordPress plugin that captures PHP errors and exceptions on your site and ships
 them to the [g8scope](https://scope.g8suite.com) ingest API. It is a **thin
-adapter** over the runtime [`g8scope/php`](../bliptrace-php) SDK — all the envelope
+adapter** over the runtime [`bliptrace/php`](../bliptrace-php) SDK — all the envelope
 building, scrubbing and transport live there; this plugin only wires the PHP
 error handlers and enriches reports with request context.
 
@@ -35,7 +35,7 @@ From the plugin directory:
 composer install
 ```
 
-This pulls in `g8scope/php`. Then place the plugin folder under
+This pulls in `bliptrace/php`. Then place the plugin folder under
 `wp-content/plugins/g8scope/` and activate it in **wp-admin → Plugins**.
 
 ### Drop-in
@@ -69,7 +69,7 @@ keys map directly to `G8Scope\Php\Config`: `key`, `endpoint`, `environment`,
 
 ## Testing
 
-The test suite depends only on `g8scope/php` — WordPress core is **not**
+The test suite depends only on `bliptrace/php` — WordPress core is **not**
 required. WordPress functions are referenced behind `function_exists` guards so
 the plugin file is include-safe under PHPUnit without WordPress loaded.
 

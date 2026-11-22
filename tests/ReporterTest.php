@@ -21,7 +21,7 @@ it('captures a throwable into a valid, shipped envelope', function (): void {
 
     expect($t->sent[0]['endpoint'])->toBe('http://api')
         ->and($t->sent[0]['key'])->toBe('k')
-        ->and($env['schema_version'])->toBe('1.0')
+        ->and($env['schema_version'])->toBe('1.1')
         ->and($env['event_id'])->toMatch('/^[0-9a-f-]{36}$/')
         ->and($env['runtime']['name'])->toBe('php')
         ->and($env['sdk']['name'])->toBe('g8scope-wordpress')
