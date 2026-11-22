@@ -2,7 +2,7 @@
 
 A WordPress plugin that captures PHP errors and exceptions on your site and ships
 them to the [g8scope](https://scope.g8suite.com) ingest API. It is a **thin
-adapter** over the runtime [`g8scope/php`](../g8scope-php) SDK — all the envelope
+adapter** over the runtime [`g8scope/php`](../bliptrace-php) SDK — all the envelope
 building, scrubbing and transport live there; this plugin only wires the PHP
 error handlers and enriches reports with request context.
 
