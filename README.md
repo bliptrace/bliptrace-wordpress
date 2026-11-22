@@ -51,12 +51,15 @@ the `g8scope_options` option.
 ### Constants (in `wp-config.php`)
 
 ```php
-define('G8SCOPE_KEY', 'your-ingest-key');                 // required
-define('G8SCOPE_ENDPOINT', 'https://ingest.scope.g8suite.com'); // optional
-define('G8SCOPE_ENVIRONMENT', 'production');              // optional
-define('G8SCOPE_RELEASE', '1.4.2');                       // optional
-define('G8SCOPE_ENABLED', true);                          // optional
+define('BLIPTRACE_KEY', 'your-ingest-key');                 // required
+define('BLIPTRACE_ENDPOINT', 'https://ingest.scope.g8suite.com'); // optional
+define('BLIPTRACE_ENVIRONMENT', 'production');              // optional
+define('BLIPTRACE_RELEASE', '1.4.2');                       // optional
+define('BLIPTRACE_ENABLED', true);                          // optional
 ```
+
+> **Deprecated:** the old `G8SCOPE_*` constants are still read when the matching `BLIPTRACE_*`
+> constant is not defined. The fallback will be removed in 2.0.
 
 Constants always win over stored options. The ingest key is the only required
 value — without it the plugin stays dormant.

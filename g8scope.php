@@ -25,6 +25,21 @@ if (is_file($g8scopeAutoloader)) {
 }
 
 /**
+ * Value of the BLIPTRACE_<name> constant, else the deprecated G8SCOPE_<name>
+ * (removed in 2.0). Null when neither is defined.
+ */
+function g8scope_constant(string $name): mixed
+{
+    foreach (['BLIPTRACE_', 'G8SCOPE_'] as $prefix) {
+        if (defined($prefix.$name)) {
+            return constant($prefix.$name);
+        }
+    }
+
+    return null;
+}
+
+/**
  * Resolve g8scope options from constants (preferred for secrets) and the
  * wp_options table. Constants win over stored options.
  *
@@ -40,21 +55,16 @@ function g8scope_resolve_options(): array
         }
     }
 
-    $constants = [
-        'key' => 'G8SCOPE_KEY',
-        'endpoint' => 'G8SCOPE_ENDPOINT',
-        'environment' => 'G8SCOPE_ENVIRONMENT',
-        'release' => 'G8SCOPE_RELEASE',
-    ];
-
-    foreach ($constants as $optionKey => $constant) {
-        if (defined($constant)) {
-            $stored[$optionKey] = constant($constant);
+    foreach (['key' => 'KEY', 'endpoint' => 'ENDPOINT', 'environment' => 'ENVIRONMENT', 'release' => 'RELEASE'] as $optionKey => $name) {
+        $value = g8scope_constant($name);
+        if ($value !== null) {
+            $stored[$optionKey] = $value;
         }
     }
 
-    if (defined('G8SCOPE_ENABLED')) {
-        $stored['enabled'] = (bool) constant('G8SCOPE_ENABLED');
+    $enabled = g8scope_constant('ENABLED');
+    if ($enabled !== null) {
+        $stored['enabled'] = (bool) $enabled;
     }
 
     // The base path lets the fingerprinter mark in-app frames.
