@@ -1,7 +1,7 @@
 # g8scope for WordPress
 
 A WordPress plugin that captures PHP errors and exceptions on your site and ships
-them to the [g8scope](https://scope.g8suite.com) ingest API. It is a **thin
+them to the [Bliptrace](https://bliptrace.com) ingest API. It is a **thin
 adapter** over the runtime [`bliptrace/php`](../bliptrace-php) SDK — all the envelope
 building, scrubbing and transport live there; this plugin only wires the PHP
 error handlers and enriches reports with request context.
@@ -52,7 +52,7 @@ the `g8scope_options` option.
 
 ```php
 define('BLIPTRACE_KEY', 'your-ingest-key');                 // required
-define('BLIPTRACE_ENDPOINT', 'https://ingest.scope.g8suite.com'); // optional
+define('BLIPTRACE_ENDPOINT', 'https://ingest.bliptrace.com/v1/ingest'); // optional
 define('BLIPTRACE_ENVIRONMENT', 'production');              // optional
 define('BLIPTRACE_RELEASE', '1.4.2');                       // optional
 define('BLIPTRACE_ENABLED', true);                          // optional
