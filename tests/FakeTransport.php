@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace G8Scope\WordPress\Tests;
+namespace Bliptrace\WordPress\Tests;
 
-use G8Scope\Php\Transport\Transport;
+use Bliptrace\Php\Transport\Transport;
 
 /** Records sent envelopes instead of hitting the network. */
 final class FakeTransport implements Transport

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace G8Scope\WordPress\Context;
+namespace Bliptrace\WordPress\Context;
 
 /**
  * Builds the envelope context from the current request server vars.

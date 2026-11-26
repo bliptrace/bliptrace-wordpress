@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use G8Scope\WordPress\Reporter;
-use G8Scope\WordPress\Tests\FakeTransport;
+use Bliptrace\WordPress\Reporter;
+use Bliptrace\WordPress\Tests\FakeTransport;
 
 it('captures a throwable into a valid, shipped envelope', function (): void {
     $t = new FakeTransport;
@@ -11,7 +11,7 @@ it('captures a throwable into a valid, shipped envelope', function (): void {
         'key' => 'k',
         'endpoint' => 'http://api',
         'base_path' => '/srv/wp',
-        'sdk_name' => 'g8scope-wordpress',
+        'sdk_name' => 'bliptrace-wordpress',
     ], $t);
 
     $reporter->captureThrowable(new RuntimeException('boom'));
@@ -24,7 +24,7 @@ it('captures a throwable into a valid, shipped envelope', function (): void {
         ->and($env['schema_version'])->toBe('1.1')
         ->and($env['event_id'])->toMatch('/^[0-9a-f-]{36}$/')
         ->and($env['runtime']['name'])->toBe('php')
-        ->and($env['sdk']['name'])->toBe('g8scope-wordpress')
+        ->and($env['sdk']['name'])->toBe('bliptrace-wordpress')
         ->and($env['level'])->toBe('error')
         ->and($env['exception']['type'])->toBe('RuntimeException')
         ->and($env['exception']['message'])->toBe('boom');

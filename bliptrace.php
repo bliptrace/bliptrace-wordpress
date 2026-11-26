@@ -1,17 +1,17 @@
 <?php
 
 declare(strict_types=1);
-use G8Scope\WordPress\Plugin;
+use Bliptrace\WordPress\Plugin;
 
 /**
- * Plugin Name: g8scope
- * Description: Captures PHP errors and exceptions on your WordPress site and ships them to the g8scope ingest API. Thin adapter over the bliptrace/php runtime SDK. Never breaks your site.
+ * Plugin Name: Bliptrace
+ * Description: Captures PHP errors and exceptions on your WordPress site and ships them to the Bliptrace ingest API. Thin adapter over the bliptrace/php runtime SDK. Never breaks your site.
  * Version: 1.0.0
  * Author: Developers Hub Sdn Bhd
  * License: MIT
  * Requires PHP: 8.2
  */
-if (! defined('ABSPATH') && ! defined('G8SCOPE_TESTING')) {
+if (! defined('ABSPATH') && ! defined('BLIPTRACE_TESTING')) {
     // Allow direct inclusion under tests; otherwise only run inside WordPress.
     if (PHP_SAPI !== 'cli') {
         return;
@@ -19,16 +19,16 @@ if (! defined('ABSPATH') && ! defined('G8SCOPE_TESTING')) {
 }
 
 // Load the composer autoloader if it ships with the plugin.
-$g8scopeAutoloader = __DIR__.'/vendor/autoload.php';
-if (is_file($g8scopeAutoloader)) {
-    require_once $g8scopeAutoloader;
+$bliptraceAutoloader = __DIR__.'/vendor/autoload.php';
+if (is_file($bliptraceAutoloader)) {
+    require_once $bliptraceAutoloader;
 }
 
 /**
- * Value of the BLIPTRACE_<name> constant, else the deprecated G8SCOPE_<name>
- * (removed in 2.0). Null when neither is defined.
+ * Value of the BLIPTRACE_<name> constant, else the deprecated legacy-prefix
+ * constant. Null when neither is defined.
  */
-function g8scope_constant(string $name): mixed
+function bliptrace_constant(string $name): mixed
 {
     foreach (['BLIPTRACE_', 'G8SCOPE_'] as $prefix) {
         if (defined($prefix.$name)) {
@@ -40,29 +40,29 @@ function g8scope_constant(string $name): mixed
 }
 
 /**
- * Resolve g8scope options from constants (preferred for secrets) and the
+ * Resolve Bliptrace options from constants (preferred for secrets) and the
  * wp_options table. Constants win over stored options.
  *
  * @return array<string,mixed>
  */
-function g8scope_resolve_options(): array
+function bliptrace_resolve_options(): array
 {
     $stored = [];
     if (function_exists('get_option')) {
-        $option = get_option('g8scope_options');
+        $option = get_option('bliptrace_options');
         if (is_array($option)) {
             $stored = $option;
         }
     }
 
     foreach (['key' => 'KEY', 'endpoint' => 'ENDPOINT', 'environment' => 'ENVIRONMENT', 'release' => 'RELEASE'] as $optionKey => $name) {
-        $value = g8scope_constant($name);
+        $value = bliptrace_constant($name);
         if ($value !== null) {
             $stored[$optionKey] = $value;
         }
     }
 
-    $enabled = g8scope_constant('ENABLED');
+    $enabled = bliptrace_constant('ENABLED');
     if ($enabled !== null) {
         $stored['enabled'] = (bool) $enabled;
     }
@@ -72,7 +72,7 @@ function g8scope_resolve_options(): array
         $stored['base_path'] = (string) constant('ABSPATH');
     }
 
-    $stored['sdk_name'] = 'g8scope-wordpress';
+    $stored['sdk_name'] = 'bliptrace-wordpress';
     $stored['sdk_version'] = '1.0.0';
 
     return $stored;
@@ -81,23 +81,23 @@ function g8scope_resolve_options(): array
 /**
  * Boot the reporter. Hooked on plugins_loaded so options/constants are ready.
  */
-function g8scope_boot(): void
+function bliptrace_boot(): void
 {
     if (! class_exists(Plugin::class)) {
         return; // Autoloader not present — fail silently, never break the site.
     }
 
-    Plugin::boot(g8scope_resolve_options());
+    Plugin::boot(bliptrace_resolve_options());
 }
 
 if (function_exists('add_action')) {
-    add_action('plugins_loaded', 'g8scope_boot');
+    add_action('plugins_loaded', 'bliptrace_boot');
 }
 
 if (function_exists('register_activation_hook')) {
     register_activation_hook(__FILE__, static function (): void {
         if (function_exists('add_option')) {
-            add_option('g8scope_options', []);
+            add_option('bliptrace_options', []);
         }
     });
 }

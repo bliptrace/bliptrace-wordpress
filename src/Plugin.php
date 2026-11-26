@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace G8Scope\WordPress;
+namespace Bliptrace\WordPress;
 
 use Throwable;
 
 /**
- * Wires the g8scope error handlers into the PHP runtime.
+ * Wires the Bliptrace error handlers into the PHP runtime.
  *
- * Pure PHP — no WordPress dependency. The bootstrap file (g8scope.php) is what
+ * Pure PHP — no WordPress dependency. The bootstrap file (bliptrace.php) is what
  * reads WP options and calls boot(); this class only deals with PHP handlers so
  * it is import/autoload-safe under PHPUnit without WordPress loaded.
  */

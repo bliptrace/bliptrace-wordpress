@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use G8Scope\WordPress\Context\RequestContext;
+use Bliptrace\WordPress\Context\RequestContext;
 
 it('builds request context from server vars and strips sensitive headers', function (): void {
     $context = RequestContext::capture([

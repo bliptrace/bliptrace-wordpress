@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace G8Scope\WordPress;
+namespace Bliptrace\WordPress;
 
 use ErrorException;
-use G8Scope\Php\Client;
-use G8Scope\Php\Config;
-use G8Scope\Php\Transport\Transport;
+use Bliptrace\Php\Client;
+use Bliptrace\Php\Config;
+use Bliptrace\Php\Transport\Transport;
 use Throwable;
 
 /**
@@ -22,7 +22,7 @@ final class Reporter
     private Client $client;
 
     /**
-     * @param  array<string,mixed>  $options  Raw options mapped to G8Scope\Php\Config.
+     * @param  array<string,mixed>  $options  Raw options mapped to Bliptrace\Php\Config.
      */
     public function __construct(array $options, ?Transport $transport = null, ?Client $client = null)
     {

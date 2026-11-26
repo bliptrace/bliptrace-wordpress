@@ -1,4 +1,4 @@
-# g8scope for WordPress
+# Bliptrace for WordPress
 
 A WordPress plugin that captures PHP errors and exceptions on your site and ships
 them to the [Bliptrace](https://bliptrace.com) ingest API. It is a **thin
@@ -6,7 +6,7 @@ adapter** over the runtime [`bliptrace/php`](../bliptrace-php) SDK — all the e
 building, scrubbing and transport live there; this plugin only wires the PHP
 error handlers and enriches reports with request context.
 
-**It will never break your site.** Every entry point is guarded — if g8scope is
+**It will never break your site.** Every entry point is guarded — if Bliptrace is
 misconfigured, unreachable, or throws internally, your site keeps running.
 
 ## How capture works
@@ -36,17 +36,17 @@ composer install
 ```
 
 This pulls in `bliptrace/php`. Then place the plugin folder under
-`wp-content/plugins/g8scope/` and activate it in **wp-admin → Plugins**.
+`wp-content/plugins/bliptrace/` and activate it in **wp-admin → Plugins**.
 
 ### Drop-in
 
 If you ship a built copy that already contains `vendor/`, just drop the folder
-into `wp-content/plugins/g8scope/` and activate it.
+into `wp-content/plugins/bliptrace/` and activate it.
 
 ## Configuration
 
 You can configure the plugin via constants (recommended for the ingest key) or
-the `g8scope_options` option.
+the `bliptrace_options` option.
 
 ### Constants (in `wp-config.php`)
 
@@ -58,16 +58,13 @@ define('BLIPTRACE_RELEASE', '1.4.2');                       // optional
 define('BLIPTRACE_ENABLED', true);                          // optional
 ```
 
-> **Deprecated:** the old `G8SCOPE_*` constants are still read when the matching `BLIPTRACE_*`
-> constant is not defined. The fallback will be removed in 2.0.
-
 Constants always win over stored options. The ingest key is the only required
 value — without it the plugin stays dormant.
 
 ### Stored options
 
-The plugin reads the `g8scope_options` option (an associative array). Supported
-keys map directly to `G8Scope\Php\Config`: `key`, `endpoint`, `environment`,
+The plugin reads the `bliptrace_options` option (an associative array). Supported
+keys map directly to `Bliptrace\Php\Config`: `key`, `endpoint`, `environment`,
 `release`, `enabled`, `timeout`, `scrub_keys`, `ignore_exceptions`, `base_path`.
 
 ## Testing
